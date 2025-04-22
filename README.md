@@ -1,168 +1,67 @@
 # Blombo
 
-A semantic layer middleware for AI/LLM applications that connects various data sources and exposes them as context to LLMs.
-
-## Features
-
-- Modular plugin-like connectors for various data sources
-- Unified context engine for structuring and enriching data
-- Pluggable interface for multiple LLM providers
-- FastAPI server for HTTP endpoints
-- Dependency injection and async support
-- Strong testing suite with pytest and httpx
-- Type safety with mypy and pydantic
-- CI-ready with linting (ruff) and formatting (black)
-
-## Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/blombo.git
-cd blombo
-```
-
-2. Install dependencies using Poetry:
-```bash
-poetry install
-```
-
-## Development
-
-The project uses Poetry for dependency management and includes several development tools:
-
-- Format code:
-```bash
-make format
-```
-
-- Run linting:
-```bash
-make lint
-```
-
-- Run tests:
-```bash
-make test
-```
-
-- Start the development server:
-```bash
-make run
-```
+A semantic layer middleware for AI/LLM applications with a modern React + Tailwind frontend.
 
 ## Project Structure
 
 ```
-blombo/
-├── src/
-│   └── blombo/
-│       ├── api/           # FastAPI server and endpoints
-│       ├── connectors/    # Data source connectors
-│       ├── core/          # Core functionality
-│       └── llm_providers/ # LLM provider implementations
-├── tests/                 # Test suite
-├── .github/              # GitHub Actions workflows
-├── pyproject.toml        # Poetry configuration
-└── Makefile             # Development tasks
+blombocom/
+├── backend/           # Python FastAPI backend
+│   ├── blombo/       # Main backend package
+│   └── tests/        # Backend tests
+├── frontend/         # React + Tailwind frontend
+│   ├── src/          # Frontend source code
+│   └── public/       # Static assets
+└── README.md         # This file
 ```
 
-## Connectors
+## Backend Setup
 
-Currently supported connectors:
-- Local Markdown files
-- Google Calendar
-- Google Drive
-- Gmail
-- Slack
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
 
-### Slack Connector
-
-The Slack connector allows you to fetch messages from Slack channels and use them as context for your LLM applications.
-
-#### Configuration
-
-```python
-from blombo.connectors.slack import SlackConnector, SlackConnectorConfig
-
-config = SlackConnectorConfig(
-    token="xoxb-your-slack-token",
-    channels=["C1234567890"],  # Optional: specific channels to fetch from
-    days_back=30,              # How far back to fetch messages
-    max_results=100            # Maximum number of messages to fetch
-)
-
-connector = SlackConnector(config)
-await connector.connect()
-messages = await connector.fetch_data()
-```
-
-#### Features
-
-- Fetch messages from specific channels or all accessible channels
-- Include thread replies in the context
-- Extract user information, reactions, attachments, and files
-- Format messages for easy consumption by LLMs
-
-## LLM Providers
-
-Currently supported providers:
-- OpenAI (GPT-4, GPT-3.5, embeddings)
-
-## API Endpoints
-
-- `POST /generate` - Generate text with context
-- `GET /health` - Health check endpoint
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-
-MIT License
-
-## Development Setup
-
-### Pre-commit Hooks
-
-This project uses pre-commit hooks to ensure code quality and consistency. The hooks will run automatically on each commit, checking and formatting your code according to the project's standards.
-
-#### Setup
-
-1. Install pre-commit:
+2. Install dependencies using Poetry:
    ```bash
    poetry install
    ```
 
-2. Install the pre-commit hooks:
+3. Run the development server:
    ```bash
-   poetry run pre-commit install
+   poetry run uvicorn blombo.api.server:app --reload
    ```
 
-3. (Optional) Run against all files:
+## Frontend Setup
+
+1. Navigate to the frontend directory:
    ```bash
-   poetry run pre-commit run --all-files
+   cd frontend
    ```
 
-#### Hooks
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-The following hooks are configured:
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-- **pre-commit-hooks**: Basic file checks (trailing whitespace, YAML validity, etc.)
-- **black**: Code formatting
-- **isort**: Import sorting
-- **ruff**: Fast Python linter
-- **mypy**: Static type checking
+## Development
 
-#### Configuration
+- Backend API runs on http://localhost:8000
+- Frontend development server runs on http://localhost:5173
+- API documentation available at http://localhost:8000/docs
 
-The hooks are configured in `.pre-commit-config.yaml` and use the following tools with their respective configurations:
+## Contributing
 
-- **black**: 100 character line length
-- **isort**: Black-compatible profile
-- **ruff**: Comprehensive linting rules
-- **mypy**: Strict type checking 
+1. Create a new branch for your feature
+2. Make your changes
+3. Run tests and linting
+4. Submit a pull request
+
+## License
+
+MIT 

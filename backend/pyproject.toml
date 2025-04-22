@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "A context management system for LLMs"
 authors = ["Your Name <your.email@example.com>"]
 readme = "README.md"
-packages = [{include = "blombo", from = "src"}]
+packages = [{include = "blombo"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -14,6 +14,8 @@ google-auth = "^2.0.0"
 google-api-python-client = "^2.0.0"
 slack-sdk = "^3.26.0"
 types-setuptools = "^57.4.0"
+uvicorn = "^0.34.2"
+fastapi = "^0.115.12"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0.0"

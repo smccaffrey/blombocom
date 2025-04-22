@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
@@ -19,7 +19,7 @@ class GenerateRequest(BaseModel):
     context_query: Optional[str] = None
     context_limit: Optional[int] = None
     llm_config: LLMConfig
-    settings: Dict[str, any] = {}
+    settings: Dict[str, Any] = {}
 
 
 class GenerateResponse(BaseModel):

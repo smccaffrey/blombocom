@@ -1,4 +1,4 @@
-.PHONY: install format lint test clean run
+.PHONY: install format lint test clean dev
 
 install:
 	poetry install
@@ -13,7 +13,7 @@ lint:
 	poetry run mypy .
 
 test:
-	poetry run pytest tests/ -v --cov=src/blombo --cov-report=term-missing
+	poetry run pytest tests/ -v --cov=blombo --cov-report=term-missing
 
 clean:
 	rm -rf .coverage
@@ -23,5 +23,5 @@ clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete
 
-run:
+dev:
 	poetry run uvicorn blombo.api.server:app --reload 
