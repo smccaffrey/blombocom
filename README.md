@@ -70,6 +70,38 @@ blombo/
 
 Currently supported connectors:
 - Local Markdown files
+- Google Calendar
+- Google Drive
+- Gmail
+- Slack
+
+### Slack Connector
+
+The Slack connector allows you to fetch messages from Slack channels and use them as context for your LLM applications.
+
+#### Configuration
+
+```python
+from blombo.connectors.slack import SlackConnector, SlackConnectorConfig
+
+config = SlackConnectorConfig(
+    token="xoxb-your-slack-token",
+    channels=["C1234567890"],  # Optional: specific channels to fetch from
+    days_back=30,              # How far back to fetch messages
+    max_results=100            # Maximum number of messages to fetch
+)
+
+connector = SlackConnector(config)
+await connector.connect()
+messages = await connector.fetch_data()
+```
+
+#### Features
+
+- Fetch messages from specific channels or all accessible channels
+- Include thread replies in the context
+- Extract user information, reactions, attachments, and files
+- Format messages for easy consumption by LLMs
 
 ## LLM Providers
 
